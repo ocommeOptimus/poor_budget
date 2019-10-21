@@ -4,9 +4,13 @@
 const Schema = use('Schema');
 
 class UserSchema extends Schema {
-  up() {
+  async up() {
     this.create('users', table => {
       table.increments();
+      table
+        .uuid('uuid')
+        .notNullable()
+        .defaultTo(this.db.raw('uuid_generate_v4()'));
       table
         .string('username', 80)
         .notNullable()

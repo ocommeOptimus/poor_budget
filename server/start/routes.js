@@ -21,4 +21,12 @@ Route.group(() => {
   // Auth
   Route.post('auth/register', 'UserController.register');
   Route.post('auth/login', 'UserController.login');
+
+  // Transfer
+  Route.get('transfers', 'TransferController.index').middleware('auth');
+  Route.post('transfer', 'TransferController.create').middleware('auth');
+  Route.put('transfer/:uuid', 'TransferController.update').middleware('auth');
+  Route.delete('transfer/:uuid', 'TransferController.delete').middleware(
+    'auth'
+  );
 }).prefix('api');

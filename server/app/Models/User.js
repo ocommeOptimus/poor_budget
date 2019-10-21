@@ -11,8 +11,7 @@ class User extends Model {
     super.boot();
 
     /**
-     * A hook to hash the user password before saving
-     * it to the database.
+     * A hook to hash the user password before saving it to the database.
      */
     this.addHook('beforeSave', async userInstance => {
       if (userInstance.dirty.password) {
@@ -22,17 +21,29 @@ class User extends Model {
   }
 
   /**
-   * A relationship on tokens is required for auth to
-   * work. Since features like `refreshTokens` or
-   * `rememberToken` will be saved inside the
-   * tokens table.
-   *
-   * @method tokens
-   *
+   * Hides named fields
+   * @returns {Array}
+   */
+  static get hidden() {
+    return ['id'];
+  }
+
+  /**
+   * A relationship on tokens is required for auth to work.
+   * Since features like `refreshTokens` or `rememberToken`
+   * will be saved inside the tokens table.
    * @return {Object}
    */
   tokens() {
     return this.hasMany('App/Models/Token');
+  }
+
+  /**
+   * Gets all transfers associated with an user
+   * @returns {HasMany}
+   */
+  transfers() {
+    return this.hasMany('App/Models/Transfer');
   }
 }
 

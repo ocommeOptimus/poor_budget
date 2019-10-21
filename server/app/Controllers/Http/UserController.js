@@ -3,16 +3,16 @@
 const User = use('App/Models/User');
 
 /**
- *
+ * User controller
  */
 class UserController {
   /**
    * Login a user and return a JWT
-   * @param request
    * @param auth
+   * @param request
    * @returns {Promise<*>}
    */
-  async login({request, auth}) {
+  async login({auth, request}) {
     const {email, password} = request.all();
 
     return await auth.attempt(email, password);
