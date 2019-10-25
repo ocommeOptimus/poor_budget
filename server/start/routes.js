@@ -24,6 +24,9 @@ Route.group(() => {
 
   // Transfer
   Route.get('transfers', 'TransferController.index').middleware('auth');
+  Route.get('transfers/active', 'TransferController.index_active').middleware(
+    'auth'
+  );
   Route.post('transfer', 'TransferController.create').middleware('auth');
   Route.put('transfer/:uuid', 'TransferController.update').middleware('auth');
   Route.delete('transfer/:uuid', 'TransferController.delete').middleware(

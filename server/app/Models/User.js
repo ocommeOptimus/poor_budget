@@ -1,9 +1,6 @@
 'use strict';
 
-/** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
-
-/** @type {import('@adonisjs/framework/src/Hash')} */
 const Hash = use('Hash');
 
 class User extends Model {
@@ -40,7 +37,7 @@ class User extends Model {
 
   /**
    * Gets all transfers associated with an user
-   * @returns {HasMany}
+   * @returns {Object}
    */
   transfers() {
     return this.hasMany('App/Models/Transfer');

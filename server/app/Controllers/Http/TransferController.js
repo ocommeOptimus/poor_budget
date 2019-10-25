@@ -21,9 +21,26 @@ class TransferController {
   }
 
   /**
-   * Create a new transfer
+   * Fetch all active transfers own by user
+   * @param auth
+   * @returns {Promise<Response>}
+   */
+  async index_active({auth}) {
+    // Retrieves the current user
+    const user = await auth.getUser();
+
+    // Returns all the transfer of this user
+    return await user
+      .transfers()
+      .isActive()
+      .fetch();
+  }
+
+  /**
+   * Create a new transfer and associate it with the auth user
    * @param auth
    * @param request
+   * @returns {Promise<void>}
    */
   async create({auth, request}) {
     // Retrieves the current user
@@ -58,7 +75,7 @@ class TransferController {
   }
 
   /**
-   * Update an existing transfer
+   * Update an existing transfer own by auth user
    * @param auth
    * @param request
    * @param params
@@ -101,7 +118,7 @@ class TransferController {
   }
 
   /**
-   *
+   * Delete an transfer own by auth user
    * @param auth
    * @param request
    * @param params

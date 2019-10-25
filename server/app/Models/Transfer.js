@@ -1,6 +1,5 @@
 'use strict';
 
-/** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
 const moment = use('moment');
 
@@ -11,6 +10,20 @@ class Transfer extends Model {
    */
   static get hidden() {
     return ['id', 'created_at', 'updated_at'];
+  }
+
+  /**
+   * Return only active transfer
+   * @param query
+   */
+  static scopeIsActive(query) {
+    return query.where(function() {
+      this.where('end_date', null).orWhere(
+        'end_date',
+        '>',
+        moment().format('YYYY-MM-DD')
+      );
+    });
   }
 
   /**
@@ -36,7 +49,7 @@ class Transfer extends Model {
 
   /**
    * Return the transfer owner
-   * @returns {BelongsTo}
+   * @returns {Object}
    */
   user() {
     return this.belongsTo('App/Models/User');
