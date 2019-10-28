@@ -22,7 +22,7 @@ class TransferSchema extends Schema {
       table.date('start_date').notNullable();
       table.date('end_date').nullable();
       table
-        .enum('recurring', [
+        .enum('recurrent', [
           'punctual',
           'daily',
           'weekly',
