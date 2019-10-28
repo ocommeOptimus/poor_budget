@@ -22,9 +22,14 @@ class TransferSchema extends Schema {
       table.date('start_date').notNullable();
       table.date('end_date').nullable();
       table
-        .enum('recurring', ['non-recurring', 'daily', 'weekly', 'monthly'])
-        .defaultTo('non-recurring');
-      table.json('recursion').defaultTo(JSON.stringify([]));
+        .enum('recurring', [
+          'punctual',
+          'daily',
+          'weekly',
+          'monthly',
+          'quarterly',
+        ])
+        .defaultTo('punctual');
       table.timestamps();
     });
   }
