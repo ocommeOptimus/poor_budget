@@ -1,6 +1,6 @@
-'use strict';
+'use strict'
 
-const User = use('App/Models/User');
+const User = use('App/Models/User')
 
 /**
  * User controller
@@ -12,10 +12,10 @@ class UserController {
    * @param request
    * @returns {Promise<*>}
    */
-  async login({auth, request}) {
-    const {email, password} = request.all();
+  async login({ auth, request }) {
+    const { email, password } = request.all()
 
-    return await auth.attempt(email, password);
+    return auth.attempt(email, password)
   }
 
   /**
@@ -23,17 +23,13 @@ class UserController {
    * @param request
    * @returns {Promise<*>}
    */
-  async register({request}) {
-    const {email, password} = request.all();
+  async register({ request }) {
+    const { email, password } = request.all()
 
-    await User.create({
-      email,
-      password,
-      username: email,
-    });
+    await User.create({ email, password, username: email })
 
-    return this.login(...arguments);
+    return this.login(...arguments)
   }
 }
 
-module.exports = UserController;
+module.exports = UserController

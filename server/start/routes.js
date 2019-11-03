@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 /*
 |--------------------------------------------------------------------------
@@ -14,22 +14,22 @@
 */
 
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
-const Route = use('Route');
+const Route = use('Route')
 
 // API
 Route.group(() => {
   // Auth
-  Route.post('auth/register', 'UserController.register');
-  Route.post('auth/login', 'UserController.login');
+  Route.post('auth/register', 'UserController.register').validator('StoreUser')
+  Route.post('auth/login', 'UserController.login')
 
   // Transfer
-  Route.get('transfers', 'TransferController.index').middleware('auth');
-  Route.get('transfers/active', 'TransferController.index_active').middleware(
-    'auth'
-  );
-  Route.post('transfer', 'TransferController.create').middleware('auth');
-  Route.put('transfer/:uuid', 'TransferController.update').middleware('auth');
-  Route.delete('transfer/:uuid', 'TransferController.delete').middleware(
-    'auth'
-  );
-}).prefix('api');
+  Route.get('transfers', 'TransferController.index').middleware(['auth'])
+  Route.get('transfers/active', 'TransferController.index_active').middleware(['auth'])
+  Route.post('transfer', 'TransferController.create')
+    .middleware(['auth'])
+    .validator('StoreTransfer')
+  Route.put('transfer/:id', 'TransferController.update')
+    .middleware(['auth'])
+    .validator('UpdateTransfer')
+  Route.delete('transfer/:id', 'TransferController.delete').middleware(['auth'])
+}).prefix('api')

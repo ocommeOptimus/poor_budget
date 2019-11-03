@@ -1,7 +1,8 @@
-'use strict';
+'use strict'
 
-const Transfer = use('App/Models/Transfer');
-const AuthorizationService = use('App/Services/AuthorizationService');
+/** @typedef {import('@adonisjs/framework/src/Request')} Request */
+/** @typedef {import('@adonisjs/auth/src/Schemes/Session')} AuthSession */
+const Transfer = use('App/Models/Transfer')
 
 /**
  * Transfer controller
@@ -9,134 +10,87 @@ const AuthorizationService = use('App/Services/AuthorizationService');
 class TransferController {
   /**
    * Fetch all transfers own by user
-   * @param auth
+   * @param {Object} ctx
+   * @param {AuthSession} ctx.auth
    * @returns {Promise<Response>}
    */
-  async index({auth}) {
+  async index({ auth }) {
     // Retrieves the current user
-    const user = await auth.getUser();
+    const user = await auth.getUser()
 
     // Returns all the transfer of this user
-    return await user.transfers().fetch();
+    return user.transfers().fetch()
   }
 
   /**
    * Fetch all active transfers own by user
-   * @param auth
+   * @param {Object} ctx
+   * @param {AuthSession} ctx.auth
    * @returns {Promise<Response>}
    */
-  async index_active({auth}) {
+  async index_active({ auth }) {
     // Retrieves the current user
-    const user = await auth.getUser();
+    const user = await auth.getUser()
 
     // Returns all the transfer of this user
     return await user
       .transfers()
       .isActive()
-      .fetch();
+      .fetch()
   }
 
   /**
    * Create a new transfer and associate it with the auth user
-   * @param auth
-   * @param request
-   * @returns {Promise<void>}
+   * @param {Object} ctx
+   * @param {AuthSession} ctx.auth
+   * @param {Request} ctx.request
+   * @returns {Promise<Transfer>}
    */
-  async create({auth, request}) {
+  async create({ auth, request }) {
     // Retrieves the current user
-    const user = await auth.getUser();
+    const user = await auth.getUser()
 
     // Retrieves data from the request
-    const {
-      name,
-      type,
-      amount,
-      start_date,
-      end_date,
-      recurring,
-      recursion,
-    } = request.all();
+    const { name, type, amount, start_date, end_date, recurrence_type } = request.all()
 
     // Create a new transfer from it
-    const transfer = new Transfer();
-    transfer.fill({
-      name,
-      type,
-      amount,
-      start_date,
-      end_date,
-      recurring,
-      recursion,
-    });
+    const transfer = new Transfer()
+    transfer.fill({ name, type, amount, start_date, end_date, recurrence_type })
 
     // Saves the transfer and returns it
-    await user.transfers().save(transfer);
-    return transfer;
+    await user.transfers().save(transfer)
+    return transfer
   }
 
   /**
    * Update an existing transfer own by auth user
-   * @param auth
-   * @param request
-   * @param params
-   * @returns {Promise<void>}
+   * @param {Object} ctx
+   * @param {Request} ctx.request
+   * @param {Transfer} transfer
+   * @returns {Promise<Transfer>}
    */
-  async update({auth, request, params}) {
-    // Retrieves the current user
-    const user = await auth.getUser();
-
-    // Retrieves the transfer and check authorization
-    const {uuid} = params;
-    const transfer = await Transfer.findByOrFail('uuid', uuid);
-    AuthorizationService.verifyPermission(user, transfer);
-
+  async update({ request, transfer }) {
     // Retrieves data from the request
-    const {
-      name,
-      type,
-      amount,
-      start_date,
-      end_date,
-      recurring,
-      recursion,
-    } = request.all();
+    const { name, type, amount, start_date, end_date, recurrence_type } = request.all()
 
     // Merge it in the transfer
-    transfer.merge({
-      name,
-      type,
-      amount,
-      start_date,
-      end_date,
-      recurring,
-      recursion,
-    });
+    transfer.merge({ name, type, amount, start_date, end_date, recurrence_type })
 
     // Saves the transfer and returns it
-    await transfer.save();
-    return transfer;
+    await transfer.save()
+    return transfer
   }
 
   /**
    * Delete an transfer own by auth user
-   * @param auth
-   * @param request
-   * @param params
-   * @returns {Promise<void>}
+   * @param {Transfer} transfer
+   * @returns {Promise<Transfer>}
    */
-  async delete({auth, request, params}) {
-    // Retrieves the current user
-    const user = await auth.getUser();
-
-    // Retrieves the transfer and check authorization
-    const {uuid} = params;
-    const transfer = await Transfer.findByOrFail('uuid', uuid);
-    AuthorizationService.verifyPermission(user, transfer);
-
+  async delete({ transfer }) {
     // Deletes the transfer and returns it
-    await transfer.delete();
-    return transfer;
+    await transfer.delete()
+    return transfer
   }
 }
 
-module.exports = TransferController;
+module.exports = TransferController
