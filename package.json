@@ -1,11 +1,12 @@
 {
   "prettier": {
     "arrowParens": "avoid",
-    "bracketSpacing": false,
+    "bracketSpacing": true,
+    "printWidth": 120,
     "quoteProps": "as-needed",
-    "semi": true,
+    "semi": false,
     "singleQuote": true,
     "tabWidth": 2,
-    "trailingComma": "es5"
+    "trailingComma": "none"
   }
 }
