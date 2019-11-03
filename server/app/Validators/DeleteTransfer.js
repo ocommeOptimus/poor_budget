@@ -4,22 +4,7 @@
 const Transfer = use('App/Models/Transfer')
 const AccessDeniedException = use('App/Exceptions/AccessDeniedException')
 
-class UpdateTransfer {
-  /**
-   * Returns rules
-   * @returns {{end_date: string, amount: string, name: string, recurrence_type: string, type: string, start_date: string}}
-   */
-  get rules() {
-    return {
-      name: 'max:80',
-      type: 'in:debit,credit',
-      amount: 'integer',
-      start_date: 'date',
-      end_date: 'date',
-      recurrence_type: 'in:punctual,daily,weekly,monthly,quarterly'
-    }
-  }
-
+class DeleteTransfer {
   /**
    * Handle authorization for transfer
    * @returns {Promise<boolean>}
@@ -38,15 +23,6 @@ class UpdateTransfer {
     this.ctx.transfer = transfer
     return authorized
   }
-
-  /**
-   * Return validation fails
-   * @param errorMessages
-   * @returns {Promise<*>}
-   */
-  async fails(errorMessages) {
-    return this.ctx.response.send(errorMessages)
-  }
 }
 
-module.exports = UpdateTransfer
+module.exports = DeleteTransfer

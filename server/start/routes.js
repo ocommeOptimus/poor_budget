@@ -31,5 +31,7 @@ Route.group(() => {
   Route.put('transfer/:id', 'TransferController.update')
     .middleware(['auth'])
     .validator('UpdateTransfer')
-  Route.delete('transfer/:id', 'TransferController.delete').middleware(['auth'])
+  Route.delete('transfer/:id', 'TransferController.delete')
+    .middleware(['auth'])
+    .validator('DeleteTransfer')
 }).prefix('api')
