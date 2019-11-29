@@ -3,6 +3,9 @@
 const Model = use('Model')
 const moment = use('moment')
 
+/**
+ * Transfer model
+ */
 class Transfer extends Model {
   /**
    * Return only active transfer
@@ -25,14 +28,14 @@ class Transfer extends Model {
 
   /**
    * Format date when retrieve it
-   * @param {Date|Null} end_date
-   * @returns {String|Null}
+   * @param {Date} end_date
+   * @returns {string}
    */
   getEndDate(end_date) {
     if (end_date !== null) {
       return moment(end_date).format('YYYY-MM-DD')
     }
-    return end_date
+    return ''
   }
 
   /**

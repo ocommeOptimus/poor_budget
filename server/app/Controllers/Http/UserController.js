@@ -1,6 +1,9 @@
 'use strict'
 
+/** @typedef {import('@adonisjs/framework/src/Request')} Request */
+/** @typedef {import('@adonisjs/auth/src/Schemes/Session')} AuthSession */
 const User = use('App/Models/User')
+const BadCredentialException = use('App/Exceptions/BadCredentialException')
 
 /**
  * User controller
@@ -8,19 +11,25 @@ const User = use('App/Models/User')
 class UserController {
   /**
    * Login a user and return a JWT
-   * @param auth
-   * @param request
+   * @param {Object} ctx
+   * @param {AuthSession} ctx.auth
+   * @param {Request} ctx.request
    * @returns {Promise<*>}
    */
   async login({ auth, request }) {
     const { email, password } = request.all()
 
-    return auth.attempt(email, password)
+    try {
+      return await auth.attempt(email, password)
+    } catch (error) {
+      throw new BadCredentialException()
+    }
   }
 
   /**
    * Register a user and try to login him
-   * @param request
+   * @param {Object} ctx
+   * @param {Request} ctx.request
    * @returns {Promise<*>}
    */
   async register({ request }) {
@@ -29,6 +38,16 @@ class UserController {
     await User.create({ email, password, username: email })
 
     return this.login(...arguments)
+  }
+
+  /**
+   * Return the user logged in
+   * @param {Object} ctx
+   * @param {AuthSession} ctx.auth
+   * @returns {Promise<User>}
+   */
+  async session({ auth }) {
+    return auth.getUser()
   }
 }
 

@@ -1,8 +1,10 @@
 'use strict'
 
 const Model = use('Model')
-const Hash = use('Hash')
 
+/**
+ * User model
+ */
 class User extends Model {
   static boot() {
     super.boot()
@@ -10,6 +12,14 @@ class User extends Model {
      * A hook to hash the user password before saving it to the database.
      */
     this.addHook('beforeSave', 'UserHook.hashPassword')
+  }
+
+  /**
+   * Hidden fields
+   * @returns {Array}
+   */
+  static get hidden() {
+    return ['password']
   }
 
   /**

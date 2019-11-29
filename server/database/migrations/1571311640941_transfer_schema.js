@@ -3,6 +3,9 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema')
 
+/**
+ * Transfer schema
+ */
 class TransferSchema extends Schema {
   up() {
     this.create('transfers', table => {

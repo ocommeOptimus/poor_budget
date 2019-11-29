@@ -12,7 +12,7 @@ class TransferController {
    * Fetch all transfers own by user
    * @param {Object} ctx
    * @param {AuthSession} ctx.auth
-   * @returns {Promise<Response>}
+   * @returns {Promise<*>}
    */
   async index({ auth }) {
     // Retrieves the current user
@@ -26,7 +26,7 @@ class TransferController {
    * Fetch all active transfers own by user
    * @param {Object} ctx
    * @param {AuthSession} ctx.auth
-   * @returns {Promise<Response>}
+   * @returns {Promise<*>}
    */
   async index_active({ auth }) {
     // Retrieves the current user
@@ -66,7 +66,7 @@ class TransferController {
    * Update an existing transfer own by auth user
    * @param {Object} ctx
    * @param {Request} ctx.request
-   * @param {Transfer} transfer
+   * @param {Transfer} ctx.transfer
    * @returns {Promise<Transfer>}
    */
   async update({ request, transfer }) {
@@ -83,7 +83,8 @@ class TransferController {
 
   /**
    * Delete an transfer own by auth user
-   * @param {Transfer} transfer
+   * @param {Object} ctx
+   * @param {Transfer} ctx.transfer
    * @returns {Promise<Transfer>}
    */
   async delete({ transfer }) {

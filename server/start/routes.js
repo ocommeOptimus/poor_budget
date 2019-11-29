@@ -22,7 +22,7 @@ Route.group(() => {
   Route.post('auth/register', 'UserController.register').validator('StoreUser')
   Route.post('auth/login', 'UserController.login')
 
-  // Transfer
+  // Transfers
   Route.get('transfers', 'TransferController.index').middleware(['auth'])
   Route.get('transfers/active', 'TransferController.index_active').middleware(['auth'])
   Route.post('transfer', 'TransferController.create')
@@ -34,4 +34,7 @@ Route.group(() => {
   Route.delete('transfer/:id', 'TransferController.delete')
     .middleware(['auth'])
     .validator('DeleteTransfer')
+
+  // Users
+  Route.get('user/session', 'UserController.session').middleware(['auth'])
 }).prefix('api')

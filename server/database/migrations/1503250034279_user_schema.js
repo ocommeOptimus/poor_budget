@@ -3,6 +3,9 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema')
 
+/**
+ * User schema
+ */
 class UserSchema extends Schema {
   async up() {
     this.create('users', table => {

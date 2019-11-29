@@ -8,5 +8,9 @@
     "singleQuote": true,
     "tabWidth": 2,
     "trailingComma": "none"
+  },
+  "scripts": {
+    "serve_front_dev": "npm run serve --prefix client",
+    "serve_back_dev": "npm run dev --prefix server"
   }
 }
