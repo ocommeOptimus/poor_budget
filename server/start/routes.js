@@ -19,8 +19,9 @@ const Route = use('Route')
 // API
 Route.group(() => {
   // Auth
-  Route.post('auth/register', 'UserController.register').validator('StoreUser')
-  Route.post('auth/login', 'UserController.login')
+  Route.post('auth/register', 'SecurityController.register').validator('StoreUser')
+  Route.post('auth/login', 'SecurityController.login')
+  Route.get('auth/user', 'SecurityController.user').middleware(['auth'])
 
   // Transfers
   Route.get('transfers', 'TransferController.index').middleware(['auth'])
@@ -34,7 +35,4 @@ Route.group(() => {
   Route.delete('transfer/:id', 'TransferController.delete')
     .middleware(['auth'])
     .validator('DeleteTransfer')
-
-  // Users
-  Route.get('user/session', 'UserController.session').middleware(['auth'])
 }).prefix('api')

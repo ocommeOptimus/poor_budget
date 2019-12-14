@@ -8,7 +8,7 @@ const BadCredentialException = use('App/Exceptions/BadCredentialException')
 /**
  * User controller
  */
-class UserController {
+class SecurityController {
   /**
    * Login a user and return a JWT
    * @param {Object} ctx
@@ -46,9 +46,9 @@ class UserController {
    * @param {AuthSession} ctx.auth
    * @returns {Promise<User>}
    */
-  async session({ auth }) {
+  async user({ auth }) {
     return auth.getUser()
   }
 }
 
-module.exports = UserController
+module.exports = SecurityController
