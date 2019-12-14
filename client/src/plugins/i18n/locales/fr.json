@@ -1,0 +1,35 @@
+{
+  "bad_credentials": "Identifiants incorrects",
+  "email": "Email",
+  "login": "Se connecter",
+  "logout": "Se déconnecter",
+  "not_registered_yet": "Pas encore inscrit ?",
+  "password": "Mot de passe",
+  "password_confirmation": "Confirmation du mot de passe",
+  "register": "S'inscrire",
+  "router-link": {
+    "home": "Acceuil",
+    "login": "Connexion",
+    "register": "Inscription"
+  },
+  "notify-error": {
+    "default": "Une erreur est survenue",
+    "serverDown": "Le serveur est inaccessible",
+    "401": "Accès non autorisé"
+  },
+  "notify-success": {
+    "default": "Succès",
+    "logged-in": "Connexion réussie",
+    "registration": "Inscription réussie"
+  },
+  "vee-field": {
+    "email": "email",
+    "password": "mot de passe",
+    "password_confirmation": "confirmation du mot de passe"
+  },
+  "vee-validation": {
+    "required": "Le champ {_field_} est requis",
+    "email": "Ce champ doit être un e-mail valide",
+    "confirmed": "Ce champ doit être égal au champ {_target_}"
+  }
+}
