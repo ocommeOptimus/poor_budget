@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="login-container">
     <v-card>
       <v-container class="px-8 py-4">
         <ValidationObserver ref="obs" v-slot="{ invalid }">
@@ -25,15 +25,16 @@
               />
             </ValidationProvider>
             <v-row align="center" justify="center">
-              <v-btn type="submit" class="mt-2" outlined rounded color="primary" :disabled="invalid">
-                {{ $t('login') }}
-              </v-btn>
+              <v-btn type="submit" class="mt-2" outlined rounded color="primary" :disabled="invalid">{{
+                $t('login')
+              }}</v-btn>
             </v-row>
             <v-row class="justify-center mt-2">
               <p>
-                {{ $t('not_registered_yet') }}&nbsp;<router-link :to="{ name: 'register' }">{{
-                  $t('register')
-                }}</router-link>
+                {{ $t('not_registered_yet') }}&nbsp;
+                <router-link :to="{ name: 'register' }">
+                  {{ $t('register') }}
+                </router-link>
               </p>
             </v-row>
           </v-form>
@@ -82,4 +83,8 @@ export default {
 }
 </script>
 
-<style scoped />
+<style scoped>
+.login-container {
+  max-width: 600px;
+}
+</style>

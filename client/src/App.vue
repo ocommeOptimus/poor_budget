@@ -15,6 +15,7 @@
 import AppNavBar from './views/layout/AppNavBar'
 import AppFooter from './views/layout/AppFooter'
 import Notification from './views/layout/Notification'
+
 export default {
   name: 'App',
   components: {
