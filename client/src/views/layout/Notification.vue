@@ -18,7 +18,7 @@ export default {
         display: false,
         color: '',
         message: '',
-        timeout: 4000
+        timeout: 0
       }
     }
   },
@@ -28,44 +28,40 @@ export default {
   watch: {
     error(newValue) {
       if (newValue !== null) {
-        this.handleError(newValue)
+        const message = this.getMessage('error', newValue)
+
+        this.notify(message, 'error')
+
+        this.resetError
       }
     },
     success(newValue) {
       if (newValue !== null) {
-        this.handleSuccess(newValue)
+        const message = this.getMessage('success', newValue)
+
+        this.notify(message)
+
+        this.resetSuccess
       }
     }
   },
   methods: {
     ...mapActions(['resetError', 'resetSuccess']),
-    async handleError(value) {
-      // Create the translation key and get the message
-      const translationKey = `notify-error.${value}`
-      const translation = this.$t(`notify-error.${value}`)
-
-      // If there's no message for the error get the default
-      this.snackbar.message = translation !== translationKey ? translation : this.$t('notify-error.default')
-
-      this.snackbar.color = 'error'
-      this.snackbar.display = true
-
-      // Reset error to avoid not handling another bug
-      this.resetError()
+    notify(message, color = 'success', timeout = 4000) {
+      if (message) {
+        this.snackbar.message = message
+        this.snackbar.color = color
+        this.snackbar.timeout = timeout
+        this.snackbar.display = true
+      }
     },
-    async handleSuccess(value) {
+    getMessage(notificationKey, index) {
       // Create the translation key and get the message
-      const translationKey = `notify-success.${value}`
-      const translation = this.$t(`notify-success.${value}`)
+      const translationKey = `notify-${notificationKey}.${index}`
+      const translation = this.$t(`notify-${notificationKey}.${index}`)
 
       // If there's no message for the error get the default
-      this.snackbar.message = translation !== translationKey ? translation : this.$t('notify-success.default')
-
-      this.snackbar.color = 'success'
-      this.snackbar.display = true
-
-      // Reset error to avoid not handling another bug
-      this.resetSuccess()
+      return translation !== translationKey ? translation : this.$t(`notify-${notificationKey}.default`)
     }
   }
 }
