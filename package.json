@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "format": "npm run format --prefix client && npm run format --prefix server",
     "front:dev": "npm run serve --prefix client",
     "back:dev": "npm run dev --prefix server"
   }

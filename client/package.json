@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "test:unit": "vue-cli-service test:unit",
+    "format": "prettier \"src/**/*.{js,vue,css}\" --write",
+    "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales 'src/plugins/i18n/locales/**/*.json'",
     "lint": "vue-cli-service lint",
-    "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales 'src/plugins/i18n/locales/**/*.json'"
+    "serve": "vue-cli-service serve",
+    "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.8.2",

@@ -6,6 +6,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "adonis serve --dev",
+    "format": "prettier \"./**/*.js\" --write",
     "start": "node server.js",
     "test": "node ace test"
   },
