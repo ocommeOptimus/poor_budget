@@ -12,9 +12,9 @@
 </template>
 
 <script>
-import AppNavBar from './views/layout/AppNavBar'
-import AppFooter from './views/layout/AppFooter'
-import Notification from './views/layout/Notification'
+import AppNavBar from './components/layout/AppNavBar'
+import AppFooter from './components/layout/AppFooter'
+import Notification from './components/Notification'
 
 export default {
   name: 'App',
