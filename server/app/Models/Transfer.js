@@ -8,16 +8,6 @@ const moment = use('moment')
  */
 class Transfer extends Model {
   /**
-   * Return only active transfer
-   * @param query
-   */
-  static scopeIsActive(query) {
-    return query.where(function() {
-      this.where('end_date', null).orWhere('end_date', '>', moment().format('YYYY-MM-DD'))
-    })
-  }
-
-  /**
    * Format date when retrieve it
    * @param {Date} start_date
    * @returns {String}

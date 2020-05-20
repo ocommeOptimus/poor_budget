@@ -23,23 +23,6 @@ class TransferController {
   }
 
   /**
-   * Fetch all active transfers own by user
-   * @param {Object} ctx
-   * @param {AuthSession} ctx.auth
-   * @returns {Promise<*>}
-   */
-  async index_active({ auth }) {
-    // Retrieves the current user
-    const user = await auth.getUser()
-
-    // Returns all the transfer of this user
-    return await user
-      .transfers()
-      .isActive()
-      .fetch()
-  }
-
-  /**
    * Create a new transfer and associate it with the auth user
    * @param {Object} ctx
    * @param {AuthSession} ctx.auth
