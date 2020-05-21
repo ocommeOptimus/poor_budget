@@ -14,7 +14,7 @@
 <script>
 import AppNavBar from './components/layout/AppNavBar'
 import AppFooter from './components/layout/AppFooter'
-import Notification from './components/Notification'
+import Notification from './components/layout/AppNotification'
 
 export default {
   name: 'App',
