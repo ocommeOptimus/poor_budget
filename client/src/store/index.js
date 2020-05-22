@@ -66,5 +66,9 @@ export default new Vuex.Store({
       commit('SET_SUCCESS', null)
     }
   },
-  modules: {}
+  getters: {
+    isAuth: state => {
+      return Boolean(state.user && state.user.id)
+    }
+  }
 })
